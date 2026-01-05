@@ -55,6 +55,7 @@
         if(fCount < 10 && !follows(name)){
             follows[fCount] = name;
             fCount++;
+            return true;
         }
         //// Replace the following statement with your code
         return false;
