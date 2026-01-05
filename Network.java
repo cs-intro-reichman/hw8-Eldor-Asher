@@ -32,9 +32,9 @@ public class Network {
      *  If there is no such user, returns null.
      *  Notice that the method receives a String, and returns a User object. */
     public User getUser(String name) {
-        if (name == null) return null; 
+     if (name == null) return null;
     for (int i = 0; i < userCount; i++) { 
-        if (users[i].getName().equals(name)) {
+        if (users[i].getName().equalsIgnoreCase(name)) {
             return users[i];
         }
     }
@@ -62,15 +62,18 @@ public class Network {
      *  If any of the two names is not a user in this network,
      *  or if the "follows" addition failed for some reason, returns false. */
     public boolean addFollowee(String name1, String name2) {
-       User user1 = getUser(name1);
-    User user2 = getUser(name2);
+       User u1 = getUser(name1);
+    User u2 = getUser(name2);
 
-    
-    if (user1 != null && user2 != null && !name1.equalsIgnoreCase(name2)) {
-        return user1.addFollowee(name2); 
+    // 2. בדיקת תקינות: שניהם קיימים, והם לא אותו אדם
+    if (u1 != null && u2 != null && !name1.equalsIgnoreCase(name2)) {
+        // 3. קריאה למתודה addFollowee של מחלקת User. 
+        // שימו לב: אנו שולחים את השם (String) של u2 ולא את האובייקט.
+        return u1.addFollowee(u2.getName());
     }
+    
+    // אם אחד המשתמשים null או שהם אותו אדם
     return false;
-        //// Replace the following statement with your code
         
     }
     
